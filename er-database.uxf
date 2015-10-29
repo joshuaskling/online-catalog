@@ -9,7 +9,7 @@
       <w>210</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;Movies&gt;&gt;
+    <panel_attributes>&lt;&lt;oc_movies&gt;&gt;
 --
 PK: movie_id (INTEGER)
 --
@@ -27,7 +27,7 @@ category_id (INTEGER)</panel_attributes>
       <w>210</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;Actors&gt;&gt;
+    <panel_attributes>&lt;&lt;oc_actors&gt;&gt;
 --
 PK: actor_id (INTEGER)
 --
@@ -44,7 +44,7 @@ movie_id (INTEGER)</panel_attributes>
       <w>210</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;Directors&gt;&gt;
+    <panel_attributes>&lt;&lt;oc_directors&gt;&gt;
 --
 PK: director_id (INTEGER)
 --
@@ -61,7 +61,7 @@ movie_id (INTEGER)</panel_attributes>
       <w>210</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;Categories&gt;&gt;
+    <panel_attributes>&lt;&lt;oc_categories&gt;&gt;
 --
 PK: category_id (INTEGER)
 --
