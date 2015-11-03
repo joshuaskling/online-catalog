@@ -81,9 +81,15 @@ if(isset($_GET['searchForm'])){  //user submitte the filter form
 }
 }
 
-function isHealthyChoiceChecked(){
-	if(isset($_GET['healthyChoice'])){
-		return "checked";
+function getStatistics(){
+	$sql = "SELECT MIN(rating) AS low, MAX(rating) AS high, AVG(rating) AS average, COUNT(rating) AS total 
+			FROM oc_movies";
+	$records = getDataBySQL($sql);	
+	foreach ($records as $record) {
+		echo "Lowest Rating: " . $record['low'] . "<br />";
+		echo "Highest Rating: " . $record['high'] . "<br />";
+		echo "Average Rating: " . $record['average'] . "<br />";
+		echo "Total Rating: " . $record['total'] . "<br />";
 	}
 }
 ?>
@@ -182,6 +188,10 @@ function isHealthyChoiceChecked(){
 			<iframe src="getMoreInformation.php" name="getMoreInformationIframe" width="250" height="300" frameborder="0">
 				
 			</iframe>
+		</div>
+		<div>
+			<h2>Statistics</h2>
+			<?=getStatistics()?>
 		</div>
       
     </div>
