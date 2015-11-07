@@ -1,3 +1,18 @@
 h1 {
-	color:blue;
+	/*color:blue;*/
+	text-align: center;
 }
+
+body {
+min-height: 40em;
+
+background: #ffffff;
+background: -moz-linear-gradient(top,  #ffffff 0%, #b5e599 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#b5e599));
+background: -webkit-linear-gradient(top,  #ffffff 0%,#b5e599 100%);
+background: -o-linear-gradient(top,  #ffffff 0%,#b5e599 100%);
+background: -ms-linear-gradient(top,  #ffffff 0%,#b5e599 100%);
+background: linear-gradient(to bottom,  #ffffff 0%,#b5e599 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#b5e599',GradientType=0 );
+}
+

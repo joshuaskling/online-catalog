@@ -30,10 +30,20 @@ function displayAllMovies(){
 
 function filterProucts(){
 global $conn;
+
+//reset values
+if (isset($_GET['reset'])){
+	unset($_GET['searchForm']);
+	unset($_GET['categoryId']);
+	unset($_GET['title']);
+	unset($_GET['rating']);
+	unset($_GET['orderBy']);
+}
+
 if(isset($_GET['searchForm'])){  //user submitte the filter form
 	
 	$categoryId = $_GET['categoryId'];
-//This is the WRONG way to create quaries because it allows SQL injections
+	//This is the WRONG way to create quaries because it allows SQL injections
 	/*
 	$sql = "SELECT productName, price 
 			FROM oe_product
@@ -118,7 +128,7 @@ function getStatistics(){
 <body>
   <div>
     <header>
-      <h1>Online-Catalog</h1>
+      <h1>Online Movie Catalog</h1>
     </header>
 
     <div>
@@ -161,6 +171,7 @@ function getStatistics(){
 		</select>
 		<br />
 		<input type="submit" value="Search Movies" name="searchForm" />
+		<input type="submit" value="Reset Values" name="reset" />
 		</form>
 		
 		<hr> <br />
