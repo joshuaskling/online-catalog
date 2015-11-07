@@ -95,12 +95,16 @@ function getStatistics(){
 	$sql = "SELECT MIN(rating) AS low, MAX(rating) AS high, AVG(rating) AS average, COUNT(rating) AS total 
 			FROM oc_movies";
 	$records = getDataBySQL($sql);	
+	
+	//echo "<div id='statistics'>";
+	//echo "<h2>Statistics</h2>";
 	foreach ($records as $record) {
 		echo "Lowest Rating: " . $record['low'] . "<br />";
 		echo "Highest Rating: " . $record['high'] . "<br />";
 		echo "Average Rating: " . $record['average'] . "<br />";
 		echo "Total Rating: " . $record['total'] . "<br />";
 	}
+	//echo "</div>";
 }
 ?>
 
@@ -132,10 +136,6 @@ function getStatistics(){
     </header>
 
     <div>
-    	
-    	
-    	
-    	
 		<form method="get">
 		Select Category:
 		<select name="categoryId">
@@ -162,8 +162,6 @@ function getStatistics(){
 			<option value="10">10</option>
 		</select>
 
-
-		
 		 <strong>Order by:</strong>
 		<select name="orderBy">
 			<option value="title">Title</option>
@@ -185,6 +183,7 @@ function getStatistics(){
 			$records = filterProucts();
 		}
 		
+		/*
 		foreach ($records as $record) {
 			echo "<a target='getMoreInformationIframe' href='getMoreInformation.php?movie_id=" . $record['movie_id'] . "'>";
 			echo $record['title'];
@@ -193,6 +192,25 @@ function getStatistics(){
 			echo " - ".$record['rating'];
 			echo " - ".$record['categoryname']."<br />";
 		}
+		 * 
+		 */
+		 echo "<table id='display-table'>";
+		 foreach ($records as $record) {
+		 	echo "<tr>";
+		 	echo "<td>";
+			echo "<a target='getMoreInformationIframe' href='getMoreInformation.php?movie_id=" . $record['movie_id'] . "'>";
+			echo $record['title'];
+			echo "</a>";
+			echo "</td><td>";
+			echo $record['description'];
+			echo "</td><td class='rating'>";
+			echo $record['rating'];
+			echo "</td><td>";
+			echo $record['categoryname']."<br />";
+			echo "</td>";
+			echo "</tr>";
+		}
+		 echo "</table>";
 		?>
 		</div>
 		<div style="float: left">
@@ -200,7 +218,7 @@ function getStatistics(){
 				
 			</iframe>
 		</div>
-		<div>
+		<div id="statistics">
 			<h2>Statistics</h2>
 			<?=getStatistics()?>
 		</div>

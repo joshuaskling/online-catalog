@@ -16,3 +16,24 @@ background: linear-gradient(to bottom,  #ffffff 0%,#b5e599 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#b5e599',GradientType=0 );
 }
 
+.rating {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+#statistics{
+	border: 1px solid black;
+	float: right;
+}
+
+#display-table {
+	border-collapse: collapse;
+}
+
+td {
+	/*min-width: 2em;*/
+	max-width: 20em;
+	border: 1px solid black;
+	padding-left:1em;
+	padding-right:1em;
+}
