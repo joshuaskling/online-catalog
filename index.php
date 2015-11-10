@@ -30,6 +30,7 @@ function displayAllMovies(){
 
 function filterProucts(){
 global $conn;
+$where = false;
 if(isset($_GET['searchForm'])){  //user submitte the filter form
 	
 	$categoryId = $_GET['categoryId'];
@@ -42,26 +43,46 @@ if(isset($_GET['searchForm'])){  //user submitte the filter form
 	
 	$sql = "SELECT m.movie_id AS movie_id, m.title AS title, m.description AS description, m.rating AS rating, c.name AS categoryname
 			FROM oc_movies m
-			INNER JOIN oc_categories c ON c.category_id = m.category_id
-			WHERE m.category_id = :categoryId"; //using Named Parameters (precent SQL injections)
+			INNER JOIN oc_categories c ON c.category_id = m.category_id";
+			
+//			WHERE m.category_id = :categoryId"; //using Named Parameters (precent SQL injections)
+
 	$nameParameters = array();
-	$nameParameters[':categoryId'] = $categoryId;
+	if($categoryId != 0){
+		$sql .= " WHERE m.category_id = :categoryId";
+		$nameParameters[':categoryId'] = $categoryId;
+		$where = true;
+	}
+	
+	
 	
 	$title = $_GET['title'];
 	
 	if(!empty($title)){
+		if($where == true){
+			//$sql = $sql . "";
+			$sql .= " AND m.title = :title"; //using named parameters
+		} else {
+			$sql .= " WHERE m.title = :title";
+			$where = true;
+		}
 		
-		//$sql = $sql . "";
-		$sql .= " AND m.title = :title"; //using named parameters
 		$nameParameters[':title'] = $title;
 	}
 
 	$rating = $_GET['rating'];
 	
 	if($rating != 11){
-		$sql .= " AND m.rating = :rating"; //using named parameters
+		if($where == true){
+			$sql .= " AND m.rating = :rating"; //using named parameters
+		} else{
+			$sql .= " WHERE m.rating = :rating";
+			$where = true;
+		}
+		
 		$nameParameters[':rating'] = $rating;
 	}
+	
 	
 	$orderByFields = array("title", "rating");
 	$orderByIndex = array_search($_GET['orderBy'], $orderByFields);
@@ -82,14 +103,14 @@ if(isset($_GET['searchForm'])){  //user submitte the filter form
 }
 
 function getStatistics(){
-	$sql = "SELECT MIN(rating) AS low, MAX(rating) AS high, AVG(rating) AS average, COUNT(rating) AS total 
+	$sql = "SELECT MIN(rating) AS low, MAX(rating) AS high, AVG(rating) AS average, COUNT(*) AS total 
 			FROM oc_movies";
 	$records = getDataBySQL($sql);	
 	foreach ($records as $record) {
 		echo "Lowest Rating: " . $record['low'] . "<br />";
 		echo "Highest Rating: " . $record['high'] . "<br />";
 		echo "Average Rating: " . $record['average'] . "<br />";
-		echo "Total Rating: " . $record['total'] . "<br />";
+		echo "Total Movies: " . $record['total'] . "<br />";
 	}
 }
 ?>
@@ -130,6 +151,7 @@ function getStatistics(){
 		Select Category:
 		<select name="categoryId">
 			<!-- this data should be coming from the database -->
+			<option value="0">NONE</option>
 			<?=displayCategories()?>
 
 		</select>

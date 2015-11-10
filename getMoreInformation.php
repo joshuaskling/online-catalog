@@ -17,22 +17,34 @@ if(isset($_GET['movie_id'])){
 		echo "Category: " . $record['categoryname'] . "<br />";
 	}
 	
+/*	$sql = "SELECT *
+			FROM oc_actors a
+			INNER JOIN oc_movie_actors m ON m.actor_id = a.actor_id
+			WHERE m.movie_id = " . $_GET['movie_id'];
+			*/
 	$sql = "SELECT *
-			FROM oc_actors
-			WHERE movie_id = " . $_GET['movie_id'];
+			FROM oc_actors a
+			WHERE a.movie_id = " . $_GET['movie_id'];
 	$records = getDataBySQL($sql);
 	echo "Actors: ";
+	echo "<br />";
 	foreach ($records as $record) {
 		echo  $record['first_name'];
 		echo " " . $record['last_name'] . "<br />";
 	}
 	
+/*	$sql = "SELECT *
+			FROM oc_directors d
+			INNER JOIN oc_movie_directors m ON m.director_id = d.director_id
+			WHERE m.movie_id = " . $_GET['movie_id'];
+			*/
 	$sql = "SELECT *
-			FROM oc_directors
-			WHERE movie_id = " . $_GET['movie_id'];
+			FROM oc_directors d
+			WHERE d.movie_id = " . $_GET['movie_id'];
 	$records = getDataBySQL($sql);
-	echo "<br />";
+	
 	echo "Directors: ";
+	echo "<br />";
 	foreach ($records as $record) {
 		echo  $record['first_name'];
 		echo " " . $record['last_name'] . "<br />";
