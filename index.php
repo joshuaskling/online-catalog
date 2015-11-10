@@ -247,9 +247,9 @@ function getStatistics(){
       
     </div>
 
-    <footer>
+    <!--<footer>
      <p>&copy; Copyright  by Mauro</p>
-    </footer>
+    </footer>-->
   </div>
 </body>
 </html>
