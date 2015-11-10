@@ -151,7 +151,7 @@ function getStatistics(){
 		Select Category:
 		<select name="categoryId">
 			<!-- this data should be coming from the database -->
-			<option value="0">NONE</option>
+			<option value="0">None</option>
 			<?=displayCategories()?>
 
 		</select>
