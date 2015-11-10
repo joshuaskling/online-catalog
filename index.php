@@ -31,6 +31,16 @@ function displayAllMovies(){
 function filterProucts(){
 global $conn;
 $where = false;
+
+//reset values
+if (isset($_GET['reset'])){
+	unset($_GET['searchForm']);
+	unset($_GET['categoryId']);
+	unset($_GET['title']);
+	unset($_GET['rating']);
+	unset($_GET['orderBy']);
+}
+
 if(isset($_GET['searchForm'])){  //user submitte the filter form
 	
 	$categoryId = $_GET['categoryId'];
@@ -183,6 +193,7 @@ function getStatistics(){
 		</select>
 		<br />
 		<input type="submit" value="Search Movies" name="searchForm" />
+		<input type="submit" value="Reset Values" name="reset" />
 		</form>
 		
 		<hr> <br />
@@ -196,14 +207,32 @@ function getStatistics(){
 			$records = filterProucts();
 		}
 		
-		foreach ($records as $record) {
+		/*foreach ($records as $record) {
 			echo "<a target='getMoreInformationIframe' href='getMoreInformation.php?movie_id=" . $record['movie_id'] . "'>";
 			echo $record['title'];
 			echo "</a>";
 			echo " - ".$record['description'];
 			echo " - ".$record['rating'];
 			echo " - ".$record['categoryname']."<br />";
+		}*/
+		
+		echo "<table id='display-table'>";
+		 foreach ($records as $record) {
+		 	echo "<tr>";
+		 	echo "<td>";
+			echo "<a target='getMoreInformationIframe' href='getMoreInformation.php?movie_id=" . $record['movie_id'] . "'>";
+			echo $record['title'];
+			echo "</a>";
+			echo "</td><td>";
+			echo $record['description'];
+			echo "</td><td class='rating'>";
+			echo $record['rating'];
+			echo "</td><td>";
+			echo $record['categoryname']."<br />";
+			echo "</td>";
+			echo "</tr>";
 		}
+		 echo "</table>";
 		?>
 		</div>
 		<div style="float: left">
